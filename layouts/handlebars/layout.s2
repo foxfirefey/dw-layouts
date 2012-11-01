@@ -1,0 +1,746 @@
+layerinfo "type" = "layout";
+layerinfo "name"            = "Handlebars";
+layerinfo "is_public"       = 1;
+layerinfo "source_viewable" = 1;
+
+##===============================
+## Display settings - general
+##===============================
+
+propgroup presentation {
+    property use num_items_recent;
+    property use num_items_reading;
+    property use use_journalstyle_entry_page;
+    property use layout_type;
+    property use tags_page_type;
+    property use userpics_position;
+    property use entry_metadata_position;
+    property use use_custom_friend_colors;
+    property use use_shared_pic;
+    property use userlite_interaction_links;
+    property use entry_management_links;
+    property use comment_management_links;
+}
+
+set layout_type = "one-column";
+
+set custom_colors_template = """%%new%%.entry-wrapper { background-color: %%background%%; } %%new%%.entry-wrapper .userbar { color: %%foreground%%; } %%new%%.entry-wrapper .userbar a { color: %%foreground%%; }""";
+set use_custom_friend_colors = false;
+
+set userlite_interaction_links = "text";
+set entry_management_links = "text";
+set comment_management_links = "text";
+set comment_userpic_style = "small";
+set external_stylesheet = false;
+set use_journalstyle_entry_page = false;
+
+set text_posting_in = " ";
+
+##===============================
+## Journal style - colors
+##===============================
+
+property Color color_entry_datebar_bg {
+  des = "Background color of date bars between entries.";
+}
+
+property Color color_entry_datebar_fg {
+  des = "Foreground color of date bars between entries.";
+}
+
+property Color color_entry_userbar_bg {
+   des = "Background color of the entry handlebar.";
+}
+
+property Color color_entry_userbar_fg {
+   des = "Foreground color of the entry handlebar.";
+}
+
+property Color color_entry_userbar_protected_bg {
+   des = "Background color of the entry handlebar, when the entry is locked.";
+}
+
+property Color color_entry_userbar_protected_fg {
+   des = "Foreground color of the entry handlebar, when the entry is locked.";
+}
+
+property Color color_entry_userbar_custom_bg {
+   des = "Background color of the entry handlebar, when the entry is filtered.";
+}
+
+property Color color_entry_userbar_custom_fg {
+   des = "Foreground color of the entry handlebar, when the entry is filtered.";
+}
+
+property Color color_entry_userbar_private_bg {
+   des = "Background color of the entry handlebar, when the entry is private.";
+}
+
+property Color color_entry_userbar_private_fg {
+   des = "Foreground color of the entry handlebar, when the entry is private.";
+}
+
+property Color color_entry_protected_border {
+   des = "Border for locked entries.";
+}
+
+property Color color_entry_custom_border {
+   des = "Border for filtered entries.";
+}
+
+property Color color_entry_private_border {
+   des = "Border for private entries.";
+}
+
+set control_strip_bgcolor = "#000";
+set control_strip_fgcolor = "#FFF";
+
+propgroup colors {
+    property use color_page_background;
+    property use color_page_text;
+    property use color_page_link;
+    property use color_page_link_active;
+    property use color_page_link_hover;
+    property use color_page_link_visited;
+
+    property use color_entry_background;
+    property use color_entry_text;
+    property use color_entry_border;
+    property use color_entry_protected_border;
+    property use color_entry_custom_border;
+    property use color_entry_private_border;
+
+    property use color_entry_text;
+    property use color_entry_link;
+    property use color_entry_link_active;
+    property use color_entry_link_hover;
+    property use color_entry_link_visited;
+    property use color_entry_title;
+
+    property use color_entry_datebar_bg;
+    property use color_entry_datebar_fg;
+    property use color_entry_userbar_bg;
+    property use color_entry_userbar_fg;
+    property use color_entry_userbar_protected_bg;
+    property use color_entry_userbar_protected_fg;
+    property use color_entry_userbar_custom_bg;
+    property use color_entry_userbar_custom_fg;
+    property use color_entry_userbar_private_bg;
+    property use color_entry_userbar_private_fg;
+}
+
+##===============================
+## Journal style - element colors
+##===============================
+
+set color_page_background = "#f4f4f4";
+set color_entry_background = "#f4f4f4";
+set color_page_text = "#000";
+set color_page_link = "#000050";
+set color_page_link_active = "#ff00c0";
+set color_page_link_hover = "#A7EBD8";
+set color_page_link_visited = "#500050";
+set color_page_border = "";
+set color_page_title = "";
+set color_entry_datebar_bg = "#000";
+set color_entry_datebar_fg = "#FFF";
+set color_entry_border = "#000";
+
+##===============================
+## Module sections
+##===============================
+
+
+set module_layout_sections = "none|(none)|one|Header|two|Middle|three|Footer";
+set module_navlinks_section = "one";
+set module_userprofile_section = "two";
+set module_pagesummary_section = "two";
+set module_tags_section = "two";
+set module_links_section = "two";
+set module_syndicate_section = "two";
+set module_calendar_section = "two";
+set module_poweredby_section = "three";
+set module_time_section = "none";
+set module_customtext_section = "two";
+set module_active_section = "two";
+set module_credit_section = "two";
+set module_search_section = "two";
+set module_cuttagcontrols_section = "header";
+
+propgroup modules {
+    property use module_userprofile_group;
+    property use module_navlinks_group;
+    property use module_customtext_group;
+    property use module_calendar_group;
+    property use module_pagesummary_group;
+    property use module_active_group;
+    property use module_tags_group;
+    property use module_links_group;
+    property use module_syndicate_group;
+    property use module_time_group;
+    property use module_poweredby_group;
+    property use module_credit_group;
+    property use module_search_group;
+    property use module_cuttagcontrols_group;
+}
+
+
+##===============================
+## Display settings - fonts
+##===============================
+
+propgroup fonts {
+    property use font_base;
+    property use font_fallback;
+    property use font_base_size;
+    property use font_base_units;
+    property use font_journal_title;
+    property use font_journal_title_size;
+    property use font_journal_title_units;
+    property use font_journal_subtitle;
+    property use font_journal_subtitle_size;
+    property use font_journal_subtitle_units;
+    property use font_entry_title;
+    property use font_entry_title_size;
+    property use font_entry_title_units;
+    property use font_module_heading;
+    property use font_module_heading_size;
+    property use font_module_heading_units;
+    property use font_module_text;
+    property use font_module_text_size;
+    property use font_module_text_units;
+}
+
+set font_base = "";
+set font_fallback = "";
+set font_base_size = "100";
+set font_base_units = "%";
+
+##===============================
+## Custom CSS
+##===============================
+
+propgroup customcss {
+    property use external_stylesheet;
+    property use include_default_stylesheet;
+    property use linked_stylesheet;
+    property use custom_css;
+}
+
+##===============================
+## Text
+##===============================
+
+property string text_before_menu_item {
+ des = "Text before a navigation menu item.";
+ example = " [";
+ maxlength = "3";
+}
+
+property string text_after_menu_item {
+ des = "Text after a navigation menu item.";
+ example = "] ";
+ maxlength = "3";
+}
+
+propgroup text {
+##===============================
+## Text - main navigation
+##===============================
+
+    property use text_view_recent;
+    property use text_view_friends;
+    property use text_view_network;
+    property use text_view_archive;
+    property use text_view_userinfo;
+    property use text_view_memories;
+    property use text_view_tags;
+    property use text_before_menu_item;
+    property use text_after_menu_item;
+    
+##===============================
+## Text - entry comment-related
+##===============================
+
+    property use text_post_comment;
+    property use text_max_comments;
+    property use text_read_comments;
+    property use text_post_comment_friends;
+    property use text_read_comments_friends;
+
+    property use text_skiplinks_back;
+    property use text_skiplinks_forward;
+    property use text_meta_music;
+    property use text_meta_mood;
+    property use text_meta_location;
+    property use text_tags;
+
+    property use text_entry_prev;
+    property use text_entry_next;
+    property use text_edit_entry;
+    property use text_edit_tags;
+    property use text_tell_friend;
+    property use text_mem_add;
+    property use text_watch_comments;
+    property use text_unwatch_comments;
+    property use text_permalink;
+    property use text_stickyentry_subject;
+
+    property use text_module_customtext;
+    property use text_module_customtext_content;
+    property use text_module_customtext_url;
+}
+
+
+set text_edit_entry = "Edit";
+set text_edit_tags = "Tags";
+set text_tell_friend = "Share";
+set text_mem_add = "Memory";
+set text_watch_comments = "Track";
+set text_unwatch_comments = "Untrack";
+
+set text_after_menu_item = "] ";
+set text_before_menu_item = " [";
+
+##===============================
+## Display settings - images
+##===============================
+
+propgroup images {
+    property use image_background_page_group;
+    property use image_background_header_group;
+    property use image_background_header_height;
+    property use image_background_entry_group;
+    property use image_background_module_group;
+}
+
+function Page::print_default_stylesheet() {
+
+# background CSS
+    var string page_background = generate_background_css( "", "", "", $*color_page_background );
+    var string datebar_background = generate_background_css( "", "", "", $*color_entry_datebar_bg );
+    var string entry_background = generate_background_css( "", "", "", $*color_entry_background );
+
+    var string page_colors = generate_color_css($*color_page_text, $*color_page_background, $*color_page_border);
+    var string page_link_colors = generate_color_css($*color_page_link, new Color, new Color);
+    var string page_link_active_colors = generate_color_css($*color_page_link_active, new Color, new Color);
+    var string page_link_hover_colors = generate_color_css($*color_page_link_hover, new Color, new Color);
+    var string page_link_visited_colors = generate_color_css($*color_page_link_visited, new Color, new Color);
+
+# font CSS
+    var string page_font = generate_font_css($*font_base, $*font_fallback, $*font_base_size, $*font_base_units);
+    var string page_title_font = generate_font_css($*font_journal_title, $*font_fallback, $*font_journal_title_size, $*font_journal_title_units);
+    var string page_subtitle_font = generate_font_css($*font_journal_subtitle, $*font_fallback, $*font_journal_subtitle_size, $*font_journal_subtitle_units);
+    var string entry_title_font = generate_font_css($*font_entry_title, $*font_fallback, $*font_entry_title_size, $*font_entry_title_units);
+    var string module_font = generate_font_css($*font_module_text, $*font_fallback, $*font_module_text_size, $*font_module_text_units);
+    var string module_title_font = generate_font_css($*font_module_heading, $*font_fallback, $*font_module_heading_size, $*font_module_heading_units);
+
+    """
+body {
+    padding: 0;
+    $page_background
+    $page_colors
+    $page_font
+
+}
+
+#canvas {
+    margin: 0px auto;
+    position: relative;
+}
+
+a, .entry-wrapper .barwrapper a { $page_link_colors text-decoration: none; }
+a:visited, .entry-wrapper .barwrapper a { $page_link_visited_colors }
+a:hover, .entry-wrapper .barwrapper a { $page_link_hover_colors }
+a:active, .entry-wrapper .barwrapper a { $page_link_active_colors }
+.entry-wrapper .contentbar .entry-content a { text-decoration: underline; }
+span.ljuser a { text-decoration: none !important; }
+
+h1#title {
+    $page_title_font
+    margin: 0px;
+}
+
+h2#subtitle,
+h2#pagetitle {
+    $page_subtitle_font
+}
+
+
+/* thank you http://matthewjamestaylor.com/blog/ultimate-2-column-left-menu-pixels.htm */
+/* column container */
+
+        #content, #header, .module-section-two { margin-left: 10px; margin-right: 10px; }
+
+        .navigation ul { margin-left: 0px; padding-left: 0px; }
+        .navigation li { list-style-type: none; margin: 0px; padding: 0px; margin-top: 10px; margin-bottom: 10px;}
+        .navigation li.page-separator { display: none; }
+        .navigation li.page-back { float: left; }
+        .navigation li.page-forward { float: right; }
+        #footer .top { margin-left: 10px; }
+
+        #entries { clear: both; }
+        .module-section-two { clear: both; }
+
+.module h2 {
+    $module_title_font
+}
+
+.module-content {
+    $module_font
+}
+
+.entry-datebar { clear: both; padding: 5px; margin-top: 5px; margin-bottom: 5px; color: $*color_entry_datebar_fg; $datebar_background }
+.entry-datebar a { color:  $*color_entry_datebar_fg; }
+
+.entry-wrapper {
+	position:relative;		/* This fixes the IE7 overflow hidden bug and stops the layout jumping out of place */
+    clear:both;
+    float:left;
+    width:100%;				/* width of whole page */
+	overflow:hidden;		/* This chops off any overhanging divs */
+    background-color: $*color_entry_userbar_bg; /* color of left column */
+    margin-top: 5px;  
+    margin-bottom: 5px;
+    border: 1px solid $*color_entry_border;
+}
+
+.entry-wrapper.security-protected {
+    border: 1px solid $*color_entry_protected_border;
+    background-color: $*color_entry_userbar_protected_bg;
+}
+
+.entry-wrapper.security-custom {
+    border: 1px solid $*color_entry_custom_border;
+}
+
+.entry-wrapper.security-private {
+    border: 1px solid $*color_entry_private_border;
+    background-color: $*color_entry_userbar_private_bg;
+}
+
+.entry-wrapper .footer {
+    text-align: right;
+}
+
+.entry-wrapper .barwrapper {
+    float: left;
+    width: 200%;
+	position: relative;
+	left: 180px;
+    background: #fff;
+    border-left: 1px solid $*color_entry_border;
+}
+
+.entry-wrapper.security-protected .barwrapper {
+    border-left: 1px solid $*color_entry_protected_border;
+}
+
+.entry-wrapper.security-custom .barwrapper {
+    border-left: 1px solid $*color_entry_custom_border;
+}
+
+.entry-wrapper.security-private .barwrapper {
+    border-left: 1px solid $*color_entry_private_border;
+}
+
+.entry-wrapper .contentwrap {
+    float: right;
+    width: 50%;
+    position: relative;
+    right: 180px;
+    padding-bottom: 1em;
+}
+
+.entry-wrapper .barwrapper {
+    $entry_background; 
+}
+
+.entry-wrapper .userbar {
+    float: left;
+    width: 150px;
+    position: relative;
+    right: 165px;
+    text-align: left;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    overflow: hidden;
+}
+
+.entry-wrapper .entry {
+    background: $*color_entry_userbar_bg;
+}
+
+.entry-wrapper .entry, .entry-wrapper .entry a {
+    color: $*color_entry_userbar_fg;
+}
+
+/* Color userbar differently if access level colors are set */
+
+.entry-wrapper.security-protected .entry {
+    background-color: $*color_entry_userbar_protected_bg;
+}
+
+.entry-wrapper.security-protected .entry, .entry-wrapper.security-protected .entry a {
+    color: $*color_entry_userbar_protected_fg;
+}
+
+.entry-wrapper.security-custom .entry {
+    background-color: $*color_entry_userbar_custom_bg;
+}
+
+.entry-wrapper.security-custom .entry, .entry-wrapper.security-custom .entry a {
+    color: $*color_entry_userbar_custom_fg;
+}
+
+.entry-wrapper.security-private .entry {
+    background-color: $*color_entry_userbar_private_bg;
+}
+
+.entry-wrapper.security-private .entry, .entry-wrapper.security-private .entry a {
+    color: $*color_entry_userbar_private_fg;
+}
+
+.entry-wrapper .userbar ul { padding-left: 0px; list-style-type: none; }
+.entry-wrapper .footer ul { text-	align: right; margin: 0px; padding: 0px; margin-top: .5em; }
+.entry-wrapper .footer ul li { display: inline; }
+
+.entry-wrapper .entry-title { margin-top: 0px; }
+
+.entry-wrapper .tag { clear: both; margin-top: 1em;}
+.entry-wrapper .tag .tag-text { font-weight: bold; }
+.entry-wrapper .tag ul { display: inline; padding-left: .5em; margin-top: .5em; margin-bottom: .5em; }
+.entry-wrapper .tag ul li { display: inline; }
+
+.entry-wrapper .header .access-filter, .entry-wrapper .header .restrictions, .entry-wrapper .header .entry-title { display: block; float: left; margin-right: .5em; }
+
+.entry-wrapper .entry-content { clear: both; }
+
+.entry .userbar .poster { font-size: .9em; }
+.entry .userpic { padding-top: 5px; }
+
+/*
+.entry .userpic a {  margin-left: auto; margin-right: auto; display: block; width: 100px }
+.entry .userpic a { margin-left: auto; margin-right: auto; }
+*/
+
+.entry-wrapper .contentbar {
+    margin: 0 15px 0 195px;
+    position: relative;
+    right: 100%;
+    overflow: auto;
+    padding-top: 5px;
+}
+
+.entry-wrapper .barclear { clear: both; }
+
+.entry-wrapper .separator-after { clear: both; }
+
+.entry-wrapper .header .end-header { clear: both; }
+
+#postform { clear: both; }
+
+.module-section-one .module-navlinks li { display: inline; }
+.module-section-one .module-navlinks li:before { content: "$*text_before_menu_item"; }
+.module-section-one .module-navlinks li:after { content: "$*text_after_menu_item"; }
+.module-section-one .module-navlinks li a.current { font-weight: bold; }
+
+.entry .userbar .datetime .time,
+.entry .userbar .datetime { 
+    display: block; 
+    margin-left: auto; 
+    margin-right: auto; 
+}
+
+.entry .metadata ul { padding-left: 0px; }
+.entry .metadata .metadata-label { font-weight: bold; }
+
+/* Entry colors in the content */
+
+.entry-wrapper .barwrapper .contentbar {    
+    color: $*color_entry_text;
+}
+
+.entry-wrapper .barwrapper .contentbar a, .entry-wrapper .barwrapper .footer a {
+    color: $*color_entry_link;
+}
+
+.entry-wrapper .barwrapper .contentbar a:active, .entry-wrapper .barwrapper .footer a:active {
+    color: $*color_entry_link_active;
+}
+
+.entry-wrapper .barwrapper .contentbar a:hover, .entry-wrapper .barwrapper .footer a:hover {
+   color: $*color_entry_link_hover;
+}
+
+.entry-wrapper .barwrapper .contentbar a:visited, .entry-wrapper .barwrapper .footer a:visited {
+   color: $*color_entry_link_visited;
+}
+
+.entry-wrapper .barwrapper .contentbar .entry-title, .entry-wrapper .barwrapper .contentbar .entry-title a {
+    $entry_title_font
+    color: $*color_entry_title;
+}
+
+/* Archive -- year page */
+
+#archive-year .navigation ul {
+    text-align: center;
+    line-height: 2em;
+    background:none repeat scroll 0 0 #131A10;
+    clear:both;
+    color:#D2FFC1;
+    margin-bottom:5px;
+    margin-top:5px;
+    padding:5px;
+}
+
+#archive-year .navigation ul a {
+    color:#D2FFC1;
+}
+
+#archive-year .navigation ul li {
+    display: inline;
+    margin: .5em;
+    padding: .3em;
+}
+
+#archive-year .navigation ul li.active {
+    border: 1px solid #D2FFC1;;
+}
+
+#archive-year .header {
+    background:none repeat scroll 0 0 #131A10;
+    margin-bottom:5px;
+    margin-top:5px;
+    padding:5px;
+    color:#D2FFC1;
+    text-align: center;
+}
+
+#archive-year table.month caption {
+    display: none;
+}
+
+#archive-year table.month {
+    width: 100%;
+}
+
+""";
+}
+
+function Page::print()
+{
+    """
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    <head>""";
+        $this->print_head();
+"""<!-- META2 TAG GOES INSIDE THESE QUOTE MARKS -->""";
+        $this->print_stylesheets();
+        $this->print_head_title();  
+"""<style type="text/css">""";		
+"""/* TEST2 */""";
+"""</style>""";
+"""<meta name="description" content="TESTING" />""";
+    println "</head>";
+    $this->print_wrapper_start();
+    """<html id="top">""";
+    $this->print_control_strip();
+    """
+            <div id="container">
+            <div id="header">
+    """;
+    """
+                <a name="top"></a>
+    """;
+    $this->print_global_title();
+    """
+            </div>
+    """;
+    $this->print_module_section("one");
+    """
+            <div id="wrap">
+            <div id="content">
+    """;
+    $this->print_body();
+    """
+            </div>
+    """;
+    $this->print_module_section("two");
+    """
+            </div><div style="clear:both;"></div>
+        </div>
+        <div id="footer">
+    """;
+    $this->print_module_section("three");
+    """
+    <div class="top"><a href="#top">Top of Page</a></div>
+        </div>
+    """;
+    $this->print_wrapper_end();
+    """
+    </html>
+    """;
+}
+
+function Page::print_entry(Entry e) 
+"""The meat of each new layout. Describes how each page will look. In nearly all cases, the logic 
+and decision-making processes should come from pre-existing functions in core2, and should not get 
+written here. If you limit the structure of the page to HTML, function calls, and attached CSS, 
+then you will be able to pick up all of the enhancements  and accessibility requirements managed 
+by core2."""
+{
+
+    if ($e.new_day or $this isa EntryPage) {
+        """<div class="entry-datebar">\n""";
+        $e->print_time("", "none");
+        """</div>\n""";
+    }
+
+    ## For most styles, this will be overridden by FriendsPage::print_entry and such.
+    $e->print_wrapper_start();
+    """<div class="barwrapper">\n""";
+    """<div class="contentwrap">\n""";
+    """<div class="contentbar">\n""";
+    """<div class="header">\n""";
+    $e->print_metatypes();
+    $e->print_subject();
+    """<div class="end-header"></div>""";
+    """</div>\n""";
+    """<div>\n""";
+    """<div class="contents">\n""";
+    """<div class="inner">\n""";
+    if ($*entry_metadata_position == "top") { $e->print_tags(); $e->print_metadata(); }
+    $e->print_text();
+    if ($*entry_metadata_position == "bottom") { $e->print_tags(); $e->print_metadata(); }
+    """</div>\n""";
+    """</div>\n""";
+    """</div>\n""";
+    
+    """<div class="footer">\n""";
+    """<div class="inner">\n""";
+    if ($this isa EntryPage) {
+        """<hr class="above-entry-interaction-links" />""";
+        $e->print_interaction_links("topcomment");
+        $this->print_reply_container({ "target" => "topcomment" });
+        """<hr class="below-reply-container" />""";
+    }
+    $e->print_management_links();
+    "</div>\n</div>\n";
+    
+    """</div>\n</div>\n""";
+    """<div class="userbar">\n""";
+    $e->print_time("none", "");
+    $e->print_poster();
+    $e->print_userpic();
+    if (not $this isa EntryPage) {
+        $e->print_interaction_links();
+    }
+    """</div>\n""";
+    "</div>";
+    """<div class="barclear"></div>""";
+    $e->print_wrapper_end();
+
+}
+
