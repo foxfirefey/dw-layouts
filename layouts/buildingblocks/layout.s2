@@ -1,0 +1,1687 @@
+# Building Blocks
+# A re-imagining of LiveJournal's Component by foxfirefey
+#
+# TODO: strip out hardcoded CSS; all colors from properties
+# TODO: Add more column options
+# TODO: Add left/right icons
+# TODO: Style entry metadata
+# TODO: Adjustable sidebar width
+# TODO: make quick reply clear footer parts
+# TODO: make reply page nice
+
+layerinfo "type"            = "layout";
+layerinfo "name"            = "Building Blocks";
+layerinfo "is_public"       = 1;
+layerinfo "source_viewable" = 1;
+
+##===============================
+## Display settings - general
+##===============================
+
+propgroup presentation {
+    property use num_items_recent;
+    property use num_items_reading;
+    property use use_journalstyle_entry_page;
+    property use layout_type;
+    property use tags_page_type;
+    property use userpics_position;
+    property use entry_metadata_position;
+    property use use_custom_friend_colors;
+    property use use_shared_pic;
+    property use userlite_interaction_links;
+    property use entry_management_links;
+    property use comment_management_links;
+}
+
+set layout_type = "two-column-right";
+
+# Default custom colors: border around the icon and the username takes the foreground color,
+# and the background color is the entire frame around the entry
+set custom_colors_template = """%%new%%.entry-wrapper .userpic { background-color: %%foreground%%; } %%new%%.entry-wrapper .entry { background-color: %%background%%; } %%new%%.entry-wrapper .entry-info a { color: %%foreground%%; }""";
+set use_custom_friend_colors = true;
+
+set userlite_interaction_links = "text";
+set entry_management_links = "text";
+set comment_management_links = "text";
+#set comment_userpic_style = "small";
+set external_stylesheet = false;
+set use_journalstyle_entry_page = true;
+
+set text_posting_in = " ";
+
+##===============================
+## Journal style - colors
+##===============================
+
+# The line under the title
+property Color color_entry_title_border { des = "Entry title border color"; }
+# Lines around the text area in an entry
+property Color color_entry_text_border { des = "Entry text border color"; }
+# Background-foreground for date bar
+property Color color_entry_header { des = "Entry header text color"; }
+property Color color_entry_header_background { des = "Entry header background color"; }
+
+property Color color_entry_title_border { des = "Entry title border color"; }
+property Color color_entry_text_border { des = "Entry text border color"; }
+property Color color_entry_header { des = "Entry header text color"; }
+property Color color_entry_header_background { des = "Entry header background color"; }
+
+property Color color_navigation_background { des = "Navigation bar background"; }
+property Color color_navigation_border { des = ""; }
+property Color color_navigation_link { des = "Navigation link color"; }
+property Color color_navigation_link_active { des = "Navigation link active color"; }
+property Color color_navigation_link_hover { des = "Navigation link hover color"; }
+property Color color_navigation_link_visited { des = "Navigation link visited color"; }
+property Color color_navigation_link_current { des = "Navigation link current color"; }
+
+propgroup colors {
+    property use color_page_background;
+    property use color_page_text;
+    property use color_page_link;
+    property use color_page_link_active;
+    property use color_page_link_hover;
+    property use color_page_link_visited;
+    property use color_page_border;
+    property use color_page_title;
+
+    property use color_entry_background;
+    property use color_entry_border;
+
+    property use color_entry_text;
+    property use color_entry_text_border;
+
+    property use color_entry_link;
+    property use color_entry_link_active;
+    property use color_entry_link_hover;
+    property use color_entry_link_visited;
+
+    property use color_entry_title;
+    property use color_entry_title_background;
+    
+    property use color_navigation_background;
+    property use color_navigation_border;
+    property use color_navigation_link;
+    property use color_navigation_link_active;
+    property use color_navigation_link_hover;
+    property use color_navigation_link_visited;
+    property use color_navigation_link_current;
+
+    property use color_header_background;
+    property use color_page_title;
+
+}
+
+##===============================
+## Journal style - element colors
+##===============================
+
+##===============================
+## Module sections
+##===============================
+
+propgroup modules {
+    property use module_userprofile_group;
+    property use module_navlinks_group;
+    property use module_customtext_group;
+    property use module_calendar_group;
+    property use module_pagesummary_group;
+    property use module_active_group;
+    property use module_tags_group;
+    property use module_links_group;
+    property use module_syndicate_group;
+    property use module_time_group;
+    property use module_poweredby_group;
+    property use module_credit_group;
+    property use module_search_group;
+    property use module_cuttagcontrols_group;
+}
+
+set module_layout_sections = "none|(none)|nav|Navigation|one|Header|two|Middle|three|Footer";
+set module_navlinks_section = "nav";
+set module_userprofile_section = "two";
+set module_pagesummary_section = "two";
+set module_tags_section = "two";
+set module_links_section = "two";
+set module_syndicate_section = "two";
+set module_calendar_section = "two";
+set module_poweredby_section = "three";
+set module_time_section = "three";
+set module_customtext_section = "two";
+set module_active_section = "two";
+set module_credit_section = "two";
+set module_search_section = "two";
+set module_cuttagcontrols_section = "two";
+
+##===============================
+## Display settings - fonts
+##===============================
+
+propgroup fonts {
+    property use font_base;
+    property use font_fallback;
+    property use font_base_size;
+    property use font_base_units;
+    property use font_journal_title;
+    property use font_journal_title_size;
+    property use font_journal_title_units;
+    property use font_journal_subtitle;
+    property use font_journal_subtitle_size;
+    property use font_journal_subtitle_units;
+    property use font_entry_title;
+    property use font_entry_title_size;
+    property use font_entry_title_units;
+    property use font_module_heading;
+    property use font_module_heading_size;
+    property use font_module_heading_units;
+    property use font_module_text;
+    property use font_module_text_size;
+    property use font_module_text_units;
+}
+
+#===============================
+## Custom CSS
+##===============================
+
+propgroup customcss {
+    property use external_stylesheet;
+    property use include_default_stylesheet;
+    property use linked_stylesheet;
+    property use custom_css;
+}
+
+property string text_comment_by {
+    des = "Text in the head of each comment thread, before the poster username.";
+    maxlength = 40;
+    "size" = 15;
+    example = "Comment by ";
+}
+
+propgroup text {
+##===============================
+## Text - main navigation
+##===============================
+
+    property use text_view_recent;
+    property use text_view_friends;
+    property use text_view_network;
+    property use text_view_archive;
+    property use text_view_userinfo;
+    property use text_view_memories;
+    property use text_view_tags;
+
+##===============================
+## Text - entry comment-related
+##===============================
+
+    property use text_post_comment;
+    property use text_max_comments;
+    property use text_read_comments;
+    property use text_post_comment_friends;
+    property use text_read_comments_friends;
+    property use text_comment_by;
+    
+    property use text_skiplinks_back;
+    property use text_skiplinks_forward;
+    property use text_meta_music;
+    property use text_meta_mood;
+    property use text_meta_location;
+    property use text_tags;
+
+    property use text_entry_prev;
+    property use text_entry_next;
+    property use text_edit_entry;
+    property use text_edit_tags;
+    property use text_tell_friend;
+    property use text_mem_add;
+    property use text_watch_comments;
+    property use text_unwatch_comments;
+    property use text_permalink;
+    property use text_stickyentry_subject;
+
+    property use text_module_customtext;
+    property use text_module_customtext_content;
+    property use text_module_customtext_url;
+}
+
+set text_edit_entry = "Edit";
+set text_edit_tags = "Tags";
+set text_tell_friend = "Share";
+set text_mem_add = "Memory";
+set text_watch_comments = "Track";
+set text_unwatch_comments = "Untrack";
+set text_entry_prev = "Previous";
+set text_entry_next = "Next";
+set text_comment_by = "Comment by ";
+
+##===============================
+## Display settings - images
+##===============================
+
+propgroup images {
+    property use image_background_page_group;
+    property use image_background_header_group;
+    property use image_background_header_height;
+    property use image_background_entry_group;
+    property use image_background_module_group;
+}
+
+function Page::print_default_stylesheet() {
+
+# background CSS
+    var string page_background = generate_background_css ($*image_background_page_url, $*image_background_page_repeat, $*image_background_page_position, $*color_page_background);
+
+    var string page_colors = generate_color_css($*color_page_text, $*color_page_background, $*color_page_border);
+        
+    var string entry_background = generate_background_css( "", "", "", $*color_entry_background );
+
+    var string page_link_colors = generate_color_css($*color_page_link, new Color, new Color);
+    var string page_link_active_colors = generate_color_css($*color_page_link_active, new Color, new Color);
+    var string page_link_hover_colors = generate_color_css($*color_page_link_hover, new Color, new Color);
+    var string page_link_visited_colors = generate_color_css($*color_page_link_visited, new Color, new Color);
+
+# font CSS
+    var string page_font = generate_font_css($*font_base, $*font_fallback, $*font_base_size, $*font_base_units);
+    var string page_title_font = generate_font_css($*font_journal_title, $*font_fallback, $*font_journal_title_size, $*font_journal_title_units);
+    var string page_subtitle_font = generate_font_css($*font_journal_subtitle, $*font_fallback, $*font_journal_subtitle_size, $*font_journal_subtitle_units);
+    var string entry_title_font = generate_font_css($*font_entry_title, $*font_fallback, $*font_entry_title_size, $*font_entry_title_units);
+    var string module_font = generate_font_css($*font_module_text, $*font_fallback, $*font_module_text_size, $*font_module_text_units);
+    var string module_title_font = generate_font_css($*font_module_heading, $*font_fallback, $*font_module_heading_size, $*font_module_heading_units);
+
+"""
+/* Main placement */
+
+body {
+    padding: 0;
+    margin: 0px;
+    $page_background
+    $page_colors
+    $page_font
+
+}
+
+a { $page_link_colors }
+a:visited { $page_link_visited_colors }
+a:hover { $page_link_hover_colors }
+a:active { $page_link_active_colors }
+
+
+#canvas {
+    margin: 0px 0px;
+    position: relative;
+}
+
+#content {
+    float: left;
+    margin-left: 0;
+    margin-right: -100%;
+    width: 100%;
+}
+
+#content>.inner {
+   padding: 5px;
+}
+
+
+#wrap {
+    border-right: 10em solid transparent;
+}
+
+#secondary {
+    float: right;
+    margin-right: -10em;
+    width: 10em;
+}
+
+#secondary>.inner {
+    padding: 5px;
+    padding-left: 0px;
+}
+
+/* Base link colors */
+
+a { $page_link_colors }
+a:visited { $page_link_visited_colors }
+a:hover { $page_link_hover_colors }
+a:active { $page_link_active_colors }
+
+/* Top navigation */
+
+#nav {
+    background-color: $*color_navigation_background;
+    border-bottom: 1px solid $*color_navigation_border;
+}
+
+#nav .module-navlinks .module-content {
+    background-color: $*color_navigation_background;
+    padding-top: 0em;
+}
+
+
+#nav .module-navlinks ul {
+    list-style-type: none;
+    margin: 0px;
+    padding: .25em;
+}
+
+#nav .module-navlinks ul li {
+    display: inline;
+    margin-left: .5em;
+}
+
+#nav .module-navlinks ul li a {
+    color: $*color_navigation_link;
+    text-transform: lowercase;
+    text-decoration: none;
+}
+
+#nav .module-navlinks ul li a.current {
+    color: $*color_navigation_link_current; 
+}
+
+/* Title */
+
+#header  {
+    background-color: $*color_header_background;
+    border: 1px solid #003;
+    color: $*color_page_title;
+    padding: 2px;
+    font-weight: normal;
+    margin-top: 0px;
+    margin-bottom: 5px;
+}
+
+#header {
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+}
+
+#title { font-size: 1.2em; }
+#subtitle, #pagetitle { font-size: 1em; }
+
+
+
+/* Modules in sidebar */
+
+#secondary .module-content {
+    color: #606060;
+}
+
+#secondary .module-content a {
+    color: #999966;
+    text-decoration: none;
+}
+
+#secondary h2.module-header {
+    background-color: #006;
+    border: 1px solid #003;
+    font-size: 1em;
+    color: #F4F4F4;
+    padding: 2px;
+    font-weight: normal;
+    margin-top: 0px;
+    margin-bottom: 0em;
+    font-size: .8em;
+    text-transform: lowercase;
+}
+
+#secondary .module {
+    margin-bottom: 5px;
+}
+
+
+#secondary .module-content {
+    padding-top: 1em;
+    border: 1px solid black;
+    background-color: #f4f4f4;
+    font-size: .8em;
+}
+
+#secondary .module-userprofile .userpic, 
+#secondary .module-userprofile .journal-name, 
+#secondary .module-userprofile .journal-website-name {
+    text-align: center;
+}
+
+#secondary .module-content .module-list, .module-userprofile .userlite-interaction-links {
+    list-style-type: none;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 0px;
+    border-bottom: 1px solid #006;
+}
+
+#secondary .module-content .module-list li, .module-userprofile .userlite-interaction-links li {
+    border-top: 1px solid #006;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+/* Individual module tweaks */
+
+.module-search .module-content {
+   text-align: center;
+}
+
+.module-search .search-form {
+   margin-bottom: 1em;
+   margin-right: 10px;
+   margin-left: 10px;
+   text-align: right;
+}
+
+.module-userprofile .journal-name, .module-userprofile .journal-website-name {
+    margin-top: 5px;
+}
+
+.module-search .search-form .search-box {
+   width: 100%;
+   margin-bottom: 5px;
+}
+
+.module-calendar table {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.module-tags_list .manage-tags-link {
+   text-align: right;
+   margin-right: 5px;
+   margin-bottom: 5px;
+}
+
+.module-syndicate .module-content {
+   text-align: center;
+   padding-bottom: 1em;
+}
+
+.module-calendar table td {
+    text-align: right; 
+}
+
+#secondary .module-list {
+    margin-top: 0px;
+}
+
+h2.module-header {
+    -moz-border-radius-topleft: 5px;
+    border-top-left-radius: 5px;
+    -webkit-border-top-left-radius: 5px;
+    -khtml-border-top-left-radius: 5px;
+
+    -moz-border-radius-topright: 5px;
+    border-top-right-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -khtml-border-top-right-radius: 5px;
+}
+
+.module-content a {
+    color: #999966;
+}
+
+h2.module-header a {
+    color: #F4F4F4;
+    text-decoration: none;
+}
+
+
+/* Footer */
+
+#tertiary .module {
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+}
+
+#tertiary .module {
+    width: 20em;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: #006;
+    border: 1px solid black;
+    float: left;
+}
+
+#tertiary .module .module-content {
+    background-color: #006;
+    padding-top: 5px;
+    color: white;
+}
+
+#tertiary .module a {
+    color: white;
+}
+
+#footer {
+    clear: both;
+}
+
+.page-top {
+    clear: both;
+    height: 1em;
+}
+
+.page-top a {
+    display: block;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    float: right;
+    background-color: #006;
+    border: 1px solid black;
+    color: white;
+    padding: 2px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    text-decoration: none;
+    text-align: center;
+    width: 10em;
+}
+
+/* Tags page */
+
+.tags-container h2 {
+    margin-bottom: 0px;
+}
+
+.tags-container .tags-content {
+    border: 1px solid black;
+    background-color: #EFF5FF;
+    color: #606060;
+}
+
+.tags-container h2 {
+    background-color: #006;
+    border: 1px solid #003;
+    font-size: 1em;
+    color: #F4F4F4;
+    padding: 2px;
+    font-weight: normal;
+}
+
+.tags-container h2 {
+    -moz-border-radius-topleft: 5px;
+    border-top-left-radius: 5px;
+    -webkit-border-top-left-radius: 5px;
+    -khtml-border-top-left-radius: 5px;
+
+    -moz-border-radius-topright: 5px;
+    border-top-right-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -khtml-border-top-right-radius: 5px;
+}
+
+.tags-container a {
+    color: #999966;
+}
+
+.tags-container .manage-tags-link {
+    text-align: right;
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+
+/* Main content navigation */
+
+#content .navigation a {
+    color: white;
+    text-decoration: none;
+}
+
+#content .navigation ul {
+   margin-top: 0px;
+   margin-bottom: 0px;
+   list-style-type: none;
+   padding-left: 0px;
+   height: 1em;
+}
+
+#content .navigation {
+    background-color: #006;
+    border: 1px solid #003;
+    font-size: 1em;
+    color: #F4F4F4;
+    padding: 2px;
+    font-weight: normal;
+}
+
+#content .navigation ul li {
+    display: inline;
+}
+
+#content .navigation .page-back {
+    float: left;
+}
+
+#content .navigation .page-separator {
+    display: none;
+}
+
+#content .navigation .page-forward {
+    float: right;
+}
+
+#primary .navigation {
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+}
+
+
+/* Entries */
+
+.entry .contents {
+    border-left: 150px solid transparent;
+}
+
+.entry .entry-main {
+    float: right;
+    width: 100%;
+}
+
+.entry-main>.inner {
+   margin: 10px;
+   background-color: $*color_entry_background;
+   color: $*color_entry_text;
+   border: 1px solid #$*color_entry_text_border;
+   padding: 1em;
+}
+
+.entry .entry-info {
+   text-align: center;
+   
+   float: left;
+   width: 150px;
+   margin-left: -150px;
+}
+
+.entry-info>.inner {
+   margin: 10px;
+}
+
+.entry .header {
+    background-color: $*color_entry_header_background;
+    border: 1px solid $*color_entry_border;
+    font-size: 1em;
+    padding: 2px;
+    font-weight: normal;
+}
+
+.entry .entry-title {
+    font-weight: bold;
+    border-bottom: 1px solid $*color_entry_title_border;
+    color: $*color_entry_title;
+    font-size: 1em;
+    padding-bottom: 5px;
+}
+
+.entry .entry-title a {
+    text-decoration: none;
+    color: $*color_entry_title;
+}
+
+.entry .header, .entry .header a {
+    color: $*color_entry_header;
+    text-decoration: none;
+}
+
+.entry .header {
+    font-size: .8em;
+}
+
+.entry .header .datetime .date { font-weight: bold; }
+
+
+.entry a {
+    color: #999966;
+}
+
+.entry .entry-content {
+   margin-top: 1em;
+}
+
+.entry-wrapper.has-userpic .userpic {
+   margin-bottom: 10px;
+   border: 1px solid ;
+   background-color: #EFF5FF;
+   border-color: 1px solid #D6D6D6;
+   padding: 10px;
+}
+
+.entry-wrapper.has-userpic .userpic a {
+   display: block;
+   padding: 0px;
+   margin: 0px;
+}
+
+.entry-wrapper.has-userpic .userpic a img {
+   /* border: 1px solid black; */
+   border: none;
+   margin: 0px;
+}
+
+.entry .footer {
+    clear: both;
+}
+
+.entry {
+    border: 1px solid black;
+}
+
+.entry {
+   margin-top: 5px;
+   margin-bottom: 5px;
+   background-color: #F4F4F4;
+}
+
+.entry .contents .entry-title {
+    margin: 0px;
+    padding: .25em;
+}
+
+.entry .footer {
+    float: right;
+    padding: 0em;
+    width: 100%;
+}
+
+.entry .footer>.inner {
+   margin: 10px;
+}
+
+.entry .end-contents {
+    clear: both;
+}
+
+.entry .entry-end, .entry .footer-end {
+    clear: both;
+}
+
+.entry .entry-management-links, .entry-interaction-links {
+    list-style-type: none;
+}
+
+.entry .entry-management-links {
+    float: left;
+    margin: 0px;
+    padding: 0px;
+}
+
+.entry .entry-interaction-links {
+   float: right;
+   margin: 0px;
+   padding: 0px;
+}
+
+.entry .entry-management-links li, .entry .entry-interaction-links li {
+    display: inline;
+}
+
+.entry .header, .entry {
+    -moz-border-radius-topleft: 5px;
+    border-top-left-radius: 5px;
+    -webkit-border-top-left-radius: 5px;
+    -khtml-border-top-left-radius: 5px;
+
+    -moz-border-radius-topright: 5px;
+    border-top-right-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -khtml-border-top-right-radius: 5px;
+}
+
+.entry-info .poster .ljuser {
+    display: block;
+    margin-top: 10px;
+    font-size: .8em;
+}
+
+.entry .tag {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.entry .tag .tag-text {
+    font-weight: bold;
+}
+
+.entry .tag ul {
+    list-style-type: none;
+    display: inline;
+}
+
+.entry .tag li {
+    display: inline;
+}
+
+.entry .metadata-label { font-weight: bold; }
+
+.entry .metadata ul { list-style-type: none; padding-left: 0em; }
+
+.entry .metadata ul li { margin-top: 1em; margin-bottom: 1em; }
+
+dl dt { font-weight: bold; margin-bottom: .5em; margin-top: .5em; }
+
+
+/* Comments */
+
+#comments-title {
+    border: 1px solid black;
+    background-color: #F4F4F4;
+    color: #606060;
+    font-size: .8em;
+    padding: 2px;
+}
+
+.comment-wrapper #qrdiv {
+    display: block !important;
+    clear: both;
+}
+
+.start-thread {
+    margin-top: 5px;
+}
+
+.start-thread .start-by {
+    background-color: #006;
+    border: 1px solid #003;
+    font-size: 1em;
+    color: #F4F4F4;
+    padding: 2px;
+    font-weight: normal;
+    margin-top: 0px;
+    margin-bottom: 0em;
+    font-size: .8em;
+    text-transform: lowercase;
+    
+    -moz-border-radius-topleft: 5px;
+    border-top-left-radius: 5px;
+    -webkit-border-top-left-radius: 5px;
+    -khtml-border-top-left-radius: 5px;
+
+    -moz-border-radius-topright: 5px;
+    border-top-right-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -khtml-border-top-right-radius: 5px;
+
+}
+
+.comment-thread.comment-depth-1 {
+    background-color: #F4F4F4;
+    border: 1px solid black;
+    padding: 5px;
+}
+
+.comment .header {
+    background-color: #006;
+    color: #606060;
+}
+
+.comment {
+   background-color: #EFF5FF;
+   color: #606060;
+   border: 1px solid #d6d6d6;
+}
+
+.comment .header a {
+    color: #999966;
+    text-decoration: none;
+}
+
+.comment .userpic-block {
+    float: left;
+    margin-right: 10px;
+}
+
+.comment .info-block {
+   padding-top: 10px;
+}
+
+.comment .userpic a img {
+    border: none;
+}
+
+.comment .header .poster {
+   float: left;
+   margin-top: 10px;
+   margin-bottom: 10px;
+}
+
+.comment-wrapper.no-userpic .comment .header {
+  padding-left: 10px;
+}
+
+.comment .header .comment-title {
+   margin-bottom: 10px;
+}
+
+.comment .header .comment-title h4 {
+    margin: 0px;
+}
+
+.comment .header .datetime {
+    float: right;
+    margin-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.comment .header .poster-ip {
+    float: right;
+    clear: right;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.comment-wrapper.partial .comment {
+    padding: 5px;
+}
+
+.comment-wrapper.partial a {
+    text-decoration: none;
+}
+
+.comment-wrapper.partial .comment-title {
+   float: left;
+   margin-left: 10px;
+   margin-right: 10px;
+}
+
+.comment-wrapper.partial .comment-title h4 {
+   margin: 0px;
+}
+
+.comment-wrapper.partial .inner:after {
+    content: " ";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.comment-wrapper.partial h4 {
+    margin-top: 0em;
+    margin-bottom: 0em;
+    margin-right: 1em;
+}
+
+.comment .header .header-end, .comment .header .end-info-block {
+    clear: both;
+}
+
+.comment-management-links, .comment-interaction-links {
+    list-style-type: none;
+}
+
+.comment-management-links {
+    float: left;
+    margin: 0px;
+    padding: 0px;
+}
+
+.comment-interaction-links {
+   float: right;
+   margin: 0px;
+   padding: 0px;
+}
+
+.comment-management-links li, .comment-interaction-links li {
+    display: inline;
+}
+
+.comment a {
+    color: #999966;
+}
+
+.comment-content { padding: 1em; }
+
+.comment div.edittime {
+    margin-top: 1em;
+    text-align: right;
+}
+
+.comment .footer {
+    margin-bottom: 5px;
+    border-top: 1px solid #d6d6d6;
+    padding-top: 5px;
+    margin-left: 1em;
+    margin-right: 1em;
+    min-height: 1em;
+}
+
+.comment .footer .inner:after {
+    content: " ";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.comment .footer .multiform-checkbox {
+    float: left;
+    margin-right: 5px;
+}
+
+.comment .footer a {
+    text-decoration: none;
+}
+
+.comment .footer .footer-end {
+    clear: both;
+}
+
+.bottomcomment .entry-management-links {
+    list-style-type: none;
+    float: left;
+    margin: 0px;
+    padding: 0px;
+}
+
+.bottomcomment .entry-interaction-links {
+    list-style-type: none;
+    float: right;
+    margin: 0px;
+    padding: 0px;
+}
+
+.bottomcomment .entry-management-links li, .bottomcomment .entry-interaction-links li {
+    display: inline;
+}
+
+.bottomcomment  {
+    background-color: #006;
+    border: 1px solid #003;
+    font-size: 1em;
+    color: #F4F4F4;
+    padding: 5px;
+    font-weight: normal;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    margin-top: 10px;
+}
+
+.bottomcomment .bottomcomment-end {
+   clear: both;
+}
+
+.bottomcomment .multiform {
+   clear: both;
+   padding-top: 5px;
+}
+
+.bottomcomment a {
+    color: #F4f4f4;
+    text-decoration: none;
+}
+
+.comment-pages  {
+    background-color: #006;
+    border: 1px solid #003;
+    font-size: 1em;
+    color: #F4F4F4;
+    padding: 5px;
+    font-weight: normal;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    margin-top: 10px;
+}
+
+.comment-pages a {
+    color: #f4f4f4;
+}
+
+.above-entry-interaction-links, .below-reply-container {
+    clear: both;
+    background-color: #D6D6D6;
+    color: #D6D6D6;
+    height: 1px;
+    border: none;
+}
+
+/* Reply page */
+
+#postform {
+   
+}
+
+/* Archive pages */
+
+/* By year */
+
+div.month .header {
+    background-color: #006;
+    border: 1px solid #003;
+    font-size: 1em;
+    color: #F4F4F4;
+    padding: 5px;
+    font-weight: normal;
+    margin-top: 10px;
+    
+    -moz-border-radius-topleft: 5px;
+    border-top-left-radius: 5px;
+    -webkit-border-top-left-radius: 5px;
+    -khtml-border-top-left-radius: 5px;
+
+    -moz-border-radius-topright: 5px;
+    border-top-right-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -khtml-border-top-right-radius: 5px;
+}
+
+div.month .header h3 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+div.month .footer {
+    background-color: #006;
+    border: 1px solid #003;
+    font-size: 1em;
+    color: #F4F4F4;
+    padding: 5px;
+    font-weight: normal;
+    text-align: right;
+    
+    -moz-border-radius-bottomleft: 5px;
+    border-bottom-left-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -khtml-border-bottom-left-radius: 5px;
+
+    -moz-border-radius-bottomright: 5px;
+    border-bottom-right-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    -khtml-border-bottom-right-radius: 5px;
+}
+
+div.month .footer a {
+    text-decoration: none; 
+}
+
+div.month .contents {
+   background-color: #F4F4F4;
+   color: #606060;
+   border: 1px solid #d6d6d6;
+}
+
+div.month a {
+   color: #999966;
+}
+
+div.month table.month {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1em;    
+    margin-bottom: 1em;
+    background-color: #EFF5FF;
+}
+
+div.month table.month caption {
+    display: none;
+}
+
+div.month table.month td {
+    border: 1px solid #d6d6d6;
+    width: 4em;
+    height: 4em;
+    vertical-align: top;
+}
+
+div.month table.month td.day p {
+    text-align: center;
+    margin-top: .5em;
+    margin-bottom: .5em;
+}
+
+div.month table.month td.day.day-has-entries {
+    font-weight: bold;
+}
+
+div.month table.month td.day p a {
+    text-decoration: none;
+    display: block;
+}
+
+div.month table.month td.day .label {
+    text-align: right;
+    display: block;
+    margin-top: .25em;
+    margin-right: .25em;
+}
+
+div.month table.month th {
+    border: 1px solid #d6d6d6;
+    width: 4em;
+    padding: 2px;
+}
+
+.page-archive div.navigation {
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* Archive pages -- month pages */
+
+#archive-month .month dt {
+    background-color: #006;
+    border: 1px solid #003;
+    font-size: 1em;
+    color: #F4F4F4;
+    padding: 5px;
+    font-weight: normal;
+    margin-top: 10px;
+    margin-bottom: 0px;
+    
+    -moz-border-radius-topleft: 5px;
+    border-top-left-radius: 5px;
+    -webkit-border-top-left-radius: 5px;
+    -khtml-border-top-left-radius: 5px;
+
+    -moz-border-radius-topright: 5px;
+    border-top-right-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -khtml-border-top-right-radius: 5px;
+}
+
+#archive-month .month dt a {
+    color: white;
+    text-decoration: none;
+}
+
+#archive-month .month dd {
+   background-color: #F4F4F4;
+   color: #606060;
+   border: 1px solid #d6d6d6;
+   margin-left: 0px;
+   padding-left: 1em;
+   padding-top: 1em;
+   padding-bottom: 1em;
+}
+
+#archive-month .month dd h3 {
+   display: inline;
+   font-size: 1em;
+   margin-left: .5em;
+}
+
+#archive-month .month dd .tag {
+   margin-top: .3em;
+   margin-left: 1em;
+   margin-bottom: .3em;
+}
+
+#archive-month .month dd ol>li {
+   margin-bottom: .5em;
+}
+
+#archive-month .month dd .tag ul {
+   display: inline;
+   margin-left: 1em;
+   padding-left: 0em;
+}
+
+#archive-month .month dd .tag ul li {
+   display: inline;
+}
+
+#archive-month .month dd .access-filter {
+   margin-left: .5em;
+   margin-right: -0.5em;
+}
+
+/* Archive -day pages */
+
+h3.day-date {
+    background-color: #006;
+    border: 1px solid #003;
+    font-size: 1em;
+    color: #F4F4F4;
+    padding: 5px;
+    font-weight: normal;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    margin-top: 10px;
+}
+""";
+}
+
+function Page::print()
+"The meat of each new layout. Describes how each page will look. In nearly all cases, the logic and decision-making processes should come from pre-existing functions in core2, and should not get written here. If you limit the structure of the page to HTML, function calls, and attached CSS, then you will be able to pick up all of the enhancements  and accessibility requirements managed by core2."
+{
+    """<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\n<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">\n<head profile="http://www.w3.org/2006/03/hcard http://purl.org/uF/hAtom/0.1/ http://gmpg.org/xfn/11">\n""";
+    $this->print_head();
+    $this->print_stylesheets();
+    $this->print_head_title();
+    """</head>""";
+    $this->print_wrapper_start();
+    $this->print_control_strip();
+    """
+    <div id="canvas">
+        <div class="inner">
+            <div id="nav">""";
+                $this->print_module_section("nav");
+            """</div><!-- end nav -->
+            <div id="wrap">
+                <div id="content">
+                    <div class="inner">
+            <div id="header">
+                <div class="inner">
+                    """;
+                    """<div id="pagelabels">""";
+                    $this->print_global_title();
+                    $this->print_global_subtitle();
+                    $this->print_title();
+                    """</div><!-- end pagelabels -->""";
+                    $this->print_module_section("one");
+    """
+                </div><!-- end header>inner -->
+            </div><!-- end header -->
+                    <div id="primary"><div class="inner">
+                        """; 
+                        $this->print_body();
+    """
+                    </div></div><!-- end primary and primary>inner -->
+                </div><!-- end content>inner -->
+            </div> <!-- end content -->
+
+                    <div id="secondary"><div class="inner">
+                        """;
+                        $this->print_module_section("two");
+    """
+                    </div></div><!--  end secondary and secondary>inner -->
+            <div id="content-footer"></div>
+            </div><!-- end wrap -->
+                    
+    """;
+    
+    """
+    <div id="footer">
+        <div class="inner">
+                    <div id="tertiary"><div class="inner">
+                        """;
+                        $this->print_module_section("three");
+    """
+                    </div></div><!-- end tertiary and tertiary>inner -->
+ 
+        """;
+            print safe """
+                <div class="page-top"><a href="#">$*text_page_top</a></div>
+        </div><!-- end footer>inner -->
+    </div><!-- end footer -->
+            </div> <!-- end canvas>inner --> 
+    </div> <!-- end canvas -->
+    """;
+    $this->print_wrapper_end();
+    """</html>""";
+}
+
+
+function Page::print_entry(Entry e) 
+"The meat of each new layout. Describes how each page will look. In nearly all cases, the logic and decision-making processes should come from pre-existing functions in core2, and should not get written here. If you limit the structure of the page to HTML, function calls, and attached CSS, then you will be able to pick up all of the enhancements  and accessibility requirements managed by core2."
+{
+    ## For most styles, this will be overridden by FriendsPage::print_entry and such.
+    $e->print_wrapper_start();
+    """<div class="header">\n""";
+    $e->print_metatypes();
+    $e->print_time();    
+    """</div>\n""";
+    """<div>\n""";
+    """<div class="contents">\n""";
+    """<div class="inner">\n""";
+
+    """<div class="entry-info"><div class="inner">""";
+    $e->print_userpic();
+    $e->print_poster();
+    """</div></div><!-- end entry-info -->""";
+
+    """<div class="entry-main"><div class="inner">""";
+    if ($*entry_metadata_position == "top") { $e->print_metadata(); $e->print_tags(); }
+    $e->print_subject();
+    $e->print_text();
+    if ($*entry_metadata_position == "bottom") { $e->print_metadata(); $e->print_tags(); }
+    """</div>""";
+    """</div><!-- end entry-main -->""";
+     
+    """<div class="footer">\n""";
+    """<div class="inner">\n""";
+    $this->print_entry_footer($e);
+    """<div class="footer-end"></div></div>\n</div>\n<div class="entry-end"></div>""";
+
+    """<div class="end-contents"></div>""";
+    """</div>\n<!-- end contents>.inner -->"""; 
+    
+    """</div>\n<!-- end contents -->""";
+    """</div>\n<!-- end empty div -->""";
+
+    $e->print_wrapper_end();
+
+}
+
+function TagsPage::print_body
+{
+    print "<div class='tags-container'><h2>$*text_tags_page_header</h2>";
+
+    """<div class="tags-content">""";
+    if ($*tags_page_type == "multi") {
+        print_multilevel_tags($.tags, { "list-class" => "taglist tags_multilevel", "print_uses" => $*tags_page_count_type });
+        print_tag_manage_link();
+    }
+    elseif ($*tags_page_type == "cloud") {
+        print_cloud_tags($.tags, { "list-class" => "taglist tags_cloud", "print_uses" => $*tags_page_count_type });
+        print_tag_manage_link();
+    }
+    else {
+        print_list_tags($.tags, { "list-class" => "taglist tags_list", "print_uses" => $*tags_page_count_type });
+        print_tag_manage_link();
+    }
+    
+    print "</div></div>";
+}
+
+function EntryPage::print_comment_section(Entry e) {
+   "<div id='comments'><div class='inner'>";
+   "<h2 id='comments-title'>Comments</h2>";
+   $.comment_pages->print({ "anchor" => "comments", "class" => "comment-pages" });
+   if ( $e.comments.comments_disabled_maintainer ) {
+       """<div class='comments-message'>$*text_comments_disabled_maintainer</div>""";
+   } 
+   if ($.comment_pages.total_subitems > 0) {
+       $this->print_multiform_start();
+   }
+   $this->print_comments($.comments);
+   if ($.comment_pages.total_subitems > 0) {
+        "<div class='bottomcomment'>";
+        $e->print_management_links();
+        $e->print_interaction_links("bottomcomment");
+        $this->print_reply_container({ "target" => "bottomcomment" });
+        "<div class='multiform'>";
+        $this->print_multiform_actionline();
+        $this->print_multiform_end();
+        "</div>";
+        """<div class="bottomcomment-end"></div>""";
+        "</div>";
+   }
+   $.comment_pages->print({ "anchor" => "comments", "class" => "comment-pages" });
+    "</div></div>";
+}
+
+
+function EntryPage::print_comments (Comment[] cs) {
+    if (size $cs == 0) { return; }
+    
+
+    foreach var Comment c ($cs) {
+        var string parity = $c.depth % 2 ? "odd" : "even";
+        var int indent = ($c.depth - 1) * 15;
+        if ($c.depth == 1 ) {
+            """<div class="start-thread"><h3 class="start-by">$*text_comment_by""" + $c.poster.username + """</h3>""";
+        }
+        "<div class='comment-thread comment-depth-$parity comment-depth-$c.depth'>\n";
+        "<div id='$c.dom_id' style='margin-left: ${indent}px; margin-top: 5px'>\n";
+        if ($c.full) {
+            $this->print_comment($c);
+        } else {
+            $this->print_comment_partial($c);
+        }
+        "</div>";
+        $this->print_comments($c.replies);
+        "</div>";
+        if ($c.depth == 1 ) {
+            """</div>""";
+        }
+    }
+}
+
+function ReplyPage::print_comment (Comment c) {
+# ReplyPage and EntryPage work nicest if they output the same structure for printing comments and entries, but this requires to manually change both ReplyPage::print_comment and EntryPage::print_comment.  Layout authors can also choose to override separately for different structures.
+# Note that there is no multiform check on the ReplyPage.
+
+    $c->print_wrapper_start();
+    """<div class="header">\n""";
+    
+    if( $c.subject ) {
+        $c->print_subject();
+    }
+    
+    $c->print_metatypes();
+    $c->print_time();
+    """</div>\n""";
+    """<div class="contents">\n""";
+    """<div class="inner">\n""";
+    $c->print_userpic();
+    """<div class="poster-information">\n""";
+    $c->print_poster();
+    $c->print_metadata();
+    """</div>\n""";
+    $c->print_text();
+    """</div>\n""";
+    """</div>\n""";
+    """<div class="footer">\n""";
+    """<div class="inner">\n""";
+    $c->print_management_links();
+    $c->print_interaction_links();
+    $c->print_reply_container();
+    "</div>\n</div>\n";
+    $c->print_wrapper_end();   
+}
+
+function EntryPage::print_comment (Comment c) {
+# ReplyPage and EntryPage work nicest if they output the same structure for printing comments and entries, but this requires to manually change both ReplyPage::print_comment and EntryPage::print_entry.  Layout authors can also choose to override separately for different structures.
+
+    $c->print_wrapper_start();
+    """<div class="header">\n""";
+    
+    """<div class="userpic-block">""";
+    $c->print_userpic();
+    """</div>""";
+    
+    """<div class="info-block">""";
+    $c->print_subject();
+    $c->print_poster();
+    $c->print_time();
+    $c->print_metatypes();
+    $c->print_metadata();
+    """<div class="end-info-block"></div></div>""";
+    
+    """<div class="header-end"></div></div>\n""";
+    """<div class="contents">\n""";
+    """<div class="inner">\n""";
+    $c->print_text();
+    """</div>\n""";
+    """</div>\n""";
+    
+    """<div class="footer">\n""";
+    """<div class="inner">\n""";
+    if ($this.multiform_on) {
+        """<span class="multiform-checkbox">""";
+        print safe " <label for='ljcomsel_$c.talkid'>$*text_multiform_check</label> ";
+        $c->print_multiform_check();
+	"</span>";
+    }
+    $c->print_management_links();
+    $c->print_interaction_links();
+    $c->print_reply_container();
+    """<div class="footer-end"></div></div>\n</div>\n""";
+
+    $c->print_wrapper_end();
+}
+
+function MonthPage::print_body {
+    """
+    <div id="archive-month">
+        <div class="inner">
+    """;
+    $this->print_navigation( { "class" => "topnav" } );
+
+    """
+            <div class="month">
+                <div class="inner">
+                    <dl>
+                    """;
+                    
+    foreach var MonthDay d ($.days) {
+        if ($d.has_entries) {
+            """<dt><a href="$d.url">""";
+                if ($*entry_date_format == "med" or $*entry_date_format == "med_day" or $*entry_date_format == "long" or $*entry_date_format == "long_day") {
+                    print lang_ordinal($d.day);
+                } else {
+                    print "$d.day";
+                }
+            "</a></dt>";
+
+            "\n<dd>";
+            $d->print_subjectlist();
+            "</dd>\n";
+        }
+    }
+                """
+                </dl>
+            </div><!-- month>inner -->
+        </div><!-- month -->
+    """;
+    
+    $this->print_navigation( { "class" => "bottomnav" } );
+    
+    """
+        </div><!-- archive-month>inner -->
+    </div><!--archive-month -->
+    """;
+}
+
+function MonthDay::print_subjectlist() {
+    # Too many tables...
+    var Page p = get_page();
+
+    """<ol class="daylist">""";
+    foreach var Entry e ($.entries) {
+        """<li>""";
+        $e->print_time("none", "");
+        $e->print_poster();
+        $e->print_metatypes();
+        $e->print_subject();
+        """<span class="comments-count">""";
+        if ($e.comments.count > 0) {
+            print safe " - " + get_plural_phrase($e.comments.count, "text_read_comments");
+        }
+        if ($e.comments.screened) {
+            print safe " <b>$*text_month_screened_comments</b>";
+        }
+        """</span>""";
+        """<span class="entry-tags">""";
+        $e->print_tags();
+        """</span>""";
+        """</li>""";
+    }
+    """</ol>""";
+}

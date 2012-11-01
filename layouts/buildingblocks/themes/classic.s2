@@ -1,0 +1,29 @@
+layerinfo "type" = "theme";
+layerinfo "name" = "Classic";
+layerinfo "is_public"       = 1;
+layerinfo "source_viewable" = 1;
+
+set color_header_background = "#006";
+set color_page_title = "#F4F4F4";
+
+set font_base = "sans-serif";
+set font_fallback = "";
+set font_base_size = "100";
+set font_base_units = "%";
+
+set color_page_background = "#CCC4A1";
+
+set color_entry_title = "#606060";
+set color_entry_title_border = "#D6D6D6";
+
+set color_entry_text = "#606060";
+set color_entry_background = "#EFF5FF";
+
+set color_entry_header = "#CCC4A1";
+set color_entry_header_background = "#000066";
+set color_entry_border = "#000033";
+
+set color_navigation_link = "#FFF";
+set color_navigation_background = "#006";
+set color_navigation_border = "#003";
+
