@@ -19,7 +19,7 @@ layerinfo "source_viewable" = 1;
 ##===============================
 
 propgroup presentation {
-    property use num_items_recent;
+    property use num_items_recent; 
     property use num_items_reading;
     property use use_journalstyle_entry_page;
     property use layout_type;
@@ -53,6 +53,8 @@ set text_posting_in = " ";
 ## Journal style - colors
 ##===============================
 
+property Color color_header_border { des = "Header border color"; }
+
 # The line under the title
 property Color color_entry_title_border { des = "Entry title border color"; }
 # Lines around the text area in an entry
@@ -65,6 +67,7 @@ property Color color_entry_title_border { des = "Entry title border color"; }
 property Color color_entry_text_border { des = "Entry text border color"; }
 property Color color_entry_header { des = "Entry header text color"; }
 property Color color_entry_header_background { des = "Entry header background color"; }
+property Color color_entry_margin_background { des = "Background color surrounded the main entry content"; }
 
 property Color color_navigation_background { des = "Navigation bar background"; }
 property Color color_navigation_border { des = ""; }
@@ -86,7 +89,8 @@ propgroup colors {
 
     property use color_entry_background;
     property use color_entry_border;
-
+    property use color_entry_margin_background;
+    
     property use color_entry_text;
     property use color_entry_text_border;
 
@@ -107,8 +111,18 @@ propgroup colors {
     property use color_navigation_link_current;
 
     property use color_header_background;
+    property use color_header_border;
     property use color_page_title;
-
+    
+    property use color_module_title_background;
+    property use color_module_title;
+    property use color_module_border;
+    property use color_module_background;
+    property use color_module_text;
+    property use color_module_link;
+    property use color_module_link_active;
+    property use color_module_link_hover;
+    property use color_module_link_visited;
 }
 
 ##===============================
@@ -286,7 +300,10 @@ function Page::print_default_stylesheet() {
     var string entry_title_font = generate_font_css($*font_entry_title, $*font_fallback, $*font_entry_title_size, $*font_entry_title_units);
     var string module_font = generate_font_css($*font_module_text, $*font_fallback, $*font_module_text_size, $*font_module_text_units);
     var string module_title_font = generate_font_css($*font_module_heading, $*font_fallback, $*font_module_heading_size, $*font_module_heading_units);
-
+    
+# measurements
+    var string default_radius = "5px";
+    
 """
 /* Main placement */
 
@@ -298,12 +315,6 @@ body {
     $page_font
 
 }
-
-a { $page_link_colors }
-a:visited { $page_link_visited_colors }
-a:hover { $page_link_hover_colors }
-a:active { $page_link_active_colors }
-
 
 #canvas {
     margin: 0px 0px;
@@ -318,7 +329,7 @@ a:active { $page_link_active_colors }
 }
 
 #content>.inner {
-   padding: 5px;
+   padding: $default_radius;
 }
 
 
@@ -333,7 +344,7 @@ a:active { $page_link_active_colors }
 }
 
 #secondary>.inner {
-    padding: 5px;
+    padding: $default_radius;
     padding-left: 0px;
 }
 
@@ -382,42 +393,42 @@ a:active { $page_link_active_colors }
 
 #header  {
     background-color: $*color_header_background;
-    border: 1px solid #003;
+    border: 1px solid $*color_header_border;
     color: $*color_page_title;
     padding: 2px;
     font-weight: normal;
     margin-top: 0px;
-    margin-bottom: 5px;
-}
-
-#header {
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -khtml-border-radius: 5px;
+    margin-bottom: $default_radius;
+    
+    -moz-border-radius: $default_radius;
+    border-radius: $default_radius;
+    -webkit-border-radius: $default_radius;
+    -khtml-border-radius: $default_radius;
 }
 
 #title { font-size: 1.2em; }
 #subtitle, #pagetitle { font-size: 1em; }
 
-
-
 /* Modules in sidebar */
 
 #secondary .module-content {
-    color: #606060;
+    color: $*color_module_text;
 }
 
 #secondary .module-content a {
-    color: #999966;
+    color: $*color_module_link;
     text-decoration: none;
 }
 
+#secondary .module-content a:active { color: $*color_module_link_active; }
+#secondary .module-content a:hover { color: $*color_module_link_hover; }
+#secondary .module-content a:visited { color: $*color_module_link_visited; }
+
 #secondary h2.module-header {
-    background-color: #006;
-    border: 1px solid #003;
+    background-color: $*color_module_title_background;
+    border: 1px solid $*color_module_border;
     font-size: 1em;
-    color: #F4F4F4;
+    color: $*color_module_title;
     padding: 2px;
     font-weight: normal;
     margin-top: 0px;
@@ -427,14 +438,14 @@ a:active { $page_link_active_colors }
 }
 
 #secondary .module {
-    margin-bottom: 5px;
+    margin-bottom: $default_radius;
 }
 
 
 #secondary .module-content {
     padding-top: 1em;
     border: 1px solid black;
-    background-color: #f4f4f4;
+    background-color: $*color_module_background;
     font-size: .8em;
 }
 
@@ -449,11 +460,11 @@ a:active { $page_link_active_colors }
     margin-left: 10px;
     margin-right: 10px;
     padding: 0px;
-    border-bottom: 1px solid #006;
+    border-bottom: 1px solid $*color_module_title_background; /* WARNING: possible linkage effects */
 }
 
 #secondary .module-content .module-list li, .module-userprofile .userlite-interaction-links li {
-    border-top: 1px solid #006;
+    border-top: 1px solid $*color_module_title_background; /* WARNING: possible linkage effects */
     padding-top: 4px;
     padding-bottom: 4px;
 }
@@ -472,12 +483,12 @@ a:active { $page_link_active_colors }
 }
 
 .module-userprofile .journal-name, .module-userprofile .journal-website-name {
-    margin-top: 5px;
+    margin-top: $default_radius;
 }
 
 .module-search .search-form .search-box {
    width: 100%;
-   margin-bottom: 5px;
+   margin-bottom: $default_radius;
 }
 
 .module-calendar table {
@@ -487,8 +498,8 @@ a:active { $page_link_active_colors }
 
 .module-tags_list .manage-tags-link {
    text-align: right;
-   margin-right: 5px;
-   margin-bottom: 5px;
+   margin-right: $default_radius;
+   margin-bottom: $default_radius;
 }
 
 .module-syndicate .module-content {
@@ -505,23 +516,23 @@ a:active { $page_link_active_colors }
 }
 
 h2.module-header {
-    -moz-border-radius-topleft: 5px;
-    border-top-left-radius: 5px;
-    -webkit-border-top-left-radius: 5px;
-    -khtml-border-top-left-radius: 5px;
+    -moz-border-radius-topleft: $default_radius;
+    border-top-left-radius: $default_radius;
+    -webkit-border-top-left-radius: $default_radius;
+    -khtml-border-top-left-radius: $default_radius;
 
-    -moz-border-radius-topright: 5px;
-    border-top-right-radius: 5px;
-    -webkit-border-top-right-radius: 5px;
-    -khtml-border-top-right-radius: 5px;
+    -moz-border-radius-topright: $default_radius;
+    border-top-right-radius: $default_radius;
+    -webkit-border-top-right-radius: $default_radius;
+    -khtml-border-top-right-radius: $default_radius;
 }
 
 .module-content a {
-    color: #999966;
+    color: $*color_module_link;
 }
 
 h2.module-header a {
-    color: #F4F4F4;
+    color: $*color_module_title;
     text-decoration: none;
 }
 
@@ -529,18 +540,15 @@ h2.module-header a {
 /* Footer */
 
 #tertiary .module {
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -khtml-border-radius: 5px;
+    -moz-border-radius: $default_radius;
+    border-radius: $default_radius;
+    -webkit-border-radius: $default_radius;
+    -khtml-border-radius: $default_radius;
 }
 
 #tertiary .module {
     width: 20em;
-    margin-left: 5px;
-    margin-right: 5px;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    margin: $default_radius;
     background-color: #006;
     border: 1px solid black;
     float: left;
@@ -548,7 +556,7 @@ h2.module-header a {
 
 #tertiary .module .module-content {
     background-color: #006;
-    padding-top: 5px;
+    padding-top: $default_radius;
     color: white;
 }
 
@@ -567,17 +575,17 @@ h2.module-header a {
 
 .page-top a {
     display: block;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -khtml-border-radius: 5px;
+    -moz-border-radius: $default_radius;
+    border-radius: $default_radius;
+    -webkit-border-radius: $default_radius;
+    -khtml-border-radius: $default_radius;
     float: right;
     background-color: #006;
     border: 1px solid black;
     color: white;
     padding: 2px;
-    margin-right: 5px;
-    margin-bottom: 5px;
+    margin-right: $default_radius;
+    margin-bottom: $default_radius;
     text-decoration: none;
     text-align: center;
     width: 10em;
@@ -605,15 +613,15 @@ h2.module-header a {
 }
 
 .tags-container h2 {
-    -moz-border-radius-topleft: 5px;
-    border-top-left-radius: 5px;
-    -webkit-border-top-left-radius: 5px;
-    -khtml-border-top-left-radius: 5px;
+    -moz-border-radius-topleft: $default_radius;
+    border-top-left-radius: $default_radius;
+    -webkit-border-top-left-radius: $default_radius;
+    -khtml-border-top-left-radius: $default_radius;
 
-    -moz-border-radius-topright: 5px;
-    border-top-right-radius: 5px;
-    -webkit-border-top-right-radius: 5px;
-    -khtml-border-top-right-radius: 5px;
+    -moz-border-radius-topright: $default_radius;
+    border-top-right-radius: $default_radius;
+    -webkit-border-top-right-radius: $default_radius;
+    -khtml-border-top-right-radius: $default_radius;
 }
 
 .tags-container a {
@@ -668,10 +676,10 @@ h2.module-header a {
 }
 
 #primary .navigation {
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -khtml-border-radius: 5px;
+    -moz-border-radius: $default_radius;
+    border-radius: $default_radius;
+    -webkit-border-radius: $default_radius;
+    -khtml-border-radius: $default_radius;
 }
 
 
@@ -719,7 +727,7 @@ h2.module-header a {
     border-bottom: 1px solid $*color_entry_title_border;
     color: $*color_entry_title;
     font-size: 1em;
-    padding-bottom: 5px;
+    padding-bottom: $default_radius;
 }
 
 .entry .entry-title a {
@@ -738,14 +746,15 @@ h2.module-header a {
 
 .entry .header .datetime .date { font-weight: bold; }
 
-
-.entry a {
-    color: #999966;
-}
+/* Test? */
+.entry a { color: $*color_entry_link; }
+.entry a:active { color: $*color_entry_link_active; }
+.entry a:hover { color: $*color_entry_link_hover; }
+.entry a.visited { color: $*color_entry_link_visited; }
 
 .entry .entry-content {
    margin-top: 1em;
-}
+}	
 
 .entry-wrapper.has-userpic .userpic {
    margin-bottom: 10px;
@@ -772,13 +781,13 @@ h2.module-header a {
 }
 
 .entry {
-    border: 1px solid black;
+    border: 1px solid $*color_entry_border;
 }
 
 .entry {
-   margin-top: 5px;
-   margin-bottom: 5px;
-   background-color: #F4F4F4;
+   margin-top: $default_radius;
+   margin-bottom: $default_radius;
+   background-color: $*color_entry_margin_background;
 }
 
 .entry .contents .entry-title {
@@ -825,15 +834,15 @@ h2.module-header a {
 }
 
 .entry .header, .entry {
-    -moz-border-radius-topleft: 5px;
-    border-top-left-radius: 5px;
-    -webkit-border-top-left-radius: 5px;
-    -khtml-border-top-left-radius: 5px;
+    -moz-border-radius-topleft: $default_radius;
+    border-top-left-radius: $default_radius;
+    -webkit-border-top-left-radius: $default_radius;
+    -khtml-border-top-left-radius: $default_radius;
 
-    -moz-border-radius-topright: 5px;
-    border-top-right-radius: 5px;
-    -webkit-border-top-right-radius: 5px;
-    -khtml-border-top-right-radius: 5px;
+    -moz-border-radius-topright: $default_radius;
+    border-top-right-radius: $default_radius;
+    -webkit-border-top-right-radius: $default_radius;
+    -khtml-border-top-right-radius: $default_radius;
 }
 
 .entry-info .poster .ljuser {
@@ -900,22 +909,22 @@ dl dt { font-weight: bold; margin-bottom: .5em; margin-top: .5em; }
     font-size: .8em;
     text-transform: lowercase;
     
-    -moz-border-radius-topleft: 5px;
-    border-top-left-radius: 5px;
-    -webkit-border-top-left-radius: 5px;
-    -khtml-border-top-left-radius: 5px;
+    -moz-border-radius-topleft: $default_radius;
+    border-top-left-radius: $default_radius;
+    -webkit-border-top-left-radius: $default_radius;
+    -khtml-border-top-left-radius: $default_radius;
 
-    -moz-border-radius-topright: 5px;
-    border-top-right-radius: 5px;
-    -webkit-border-top-right-radius: 5px;
-    -khtml-border-top-right-radius: 5px;
+    -moz-border-radius-topright: $default_radius;
+    border-top-right-radius: $default_radius;
+    -webkit-border-top-right-radius: $default_radius;
+    -khtml-border-top-right-radius: $default_radius;
 
 }
 
 .comment-thread.comment-depth-1 {
     background-color: #F4F4F4;
     border: 1px solid black;
-    padding: 5px;
+    padding: $default_radius;
 }
 
 .comment .header {
@@ -1047,9 +1056,9 @@ dl dt { font-weight: bold; margin-bottom: .5em; margin-top: .5em; }
 }
 
 .comment .footer {
-    margin-bottom: 5px;
+    margin-bottom: $default_radius;
     border-top: 1px solid #d6d6d6;
-    padding-top: 5px;
+    padding-top: $default_radius;
     margin-left: 1em;
     margin-right: 1em;
     min-height: 1em;
@@ -1065,7 +1074,7 @@ dl dt { font-weight: bold; margin-bottom: .5em; margin-top: .5em; }
 
 .comment .footer .multiform-checkbox {
     float: left;
-    margin-right: 5px;
+    margin-right: $default_radius;
 }
 
 .comment .footer a {
@@ -1099,12 +1108,12 @@ dl dt { font-weight: bold; margin-bottom: .5em; margin-top: .5em; }
     border: 1px solid #003;
     font-size: 1em;
     color: #F4F4F4;
-    padding: 5px;
+    padding: $default_radius;
     font-weight: normal;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -khtml-border-radius: 5px;
+    -moz-border-radius: $default_radius;
+    border-radius: $default_radius;
+    -webkit-border-radius: $default_radius;
+    -khtml-border-radius: $default_radius;
     margin-top: 10px;
 }
 
@@ -1114,7 +1123,7 @@ dl dt { font-weight: bold; margin-bottom: .5em; margin-top: .5em; }
 
 .bottomcomment .multiform {
    clear: both;
-   padding-top: 5px;
+   padding-top: $default_radius;
 }
 
 .bottomcomment a {
@@ -1127,12 +1136,12 @@ dl dt { font-weight: bold; margin-bottom: .5em; margin-top: .5em; }
     border: 1px solid #003;
     font-size: 1em;
     color: #F4F4F4;
-    padding: 5px;
+    padding: $default_radius;
     font-weight: normal;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -khtml-border-radius: 5px;
+    -moz-border-radius: $default_radius;
+    border-radius: $default_radius;
+    -webkit-border-radius: $default_radius;
+    -khtml-border-radius: $default_radius;
     margin-top: 10px;
 }
 
@@ -1167,15 +1176,15 @@ div.month .header {
     font-weight: normal;
     margin-top: 10px;
     
-    -moz-border-radius-topleft: 5px;
-    border-top-left-radius: 5px;
-    -webkit-border-top-left-radius: 5px;
-    -khtml-border-top-left-radius: 5px;
+    -moz-border-radius-topleft: $default_radius;
+    border-top-left-radius: $default_radius;
+    -webkit-border-top-left-radius: $default_radius;
+    -khtml-border-top-left-radius: $default_radius;
 
-    -moz-border-radius-topright: 5px;
-    border-top-right-radius: 5px;
-    -webkit-border-top-right-radius: 5px;
-    -khtml-border-top-right-radius: 5px;
+    -moz-border-radius-topright: $default_radius;
+    border-top-right-radius: $default_radius;
+    -webkit-border-top-right-radius: $default_radius;
+    -khtml-border-top-right-radius: $default_radius;
 }
 
 div.month .header h3 {
@@ -1192,15 +1201,15 @@ div.month .footer {
     font-weight: normal;
     text-align: right;
     
-    -moz-border-radius-bottomleft: 5px;
-    border-bottom-left-radius: 5px;
-    -webkit-border-bottom-left-radius: 5px;
-    -khtml-border-bottom-left-radius: 5px;
+    -moz-border-radius-bottomleft: $default_radius;
+    border-bottom-left-radius: $default_radius;
+    -webkit-border-bottom-left-radius: $default_radius;
+    -khtml-border-bottom-left-radius: $default_radius;
 
-    -moz-border-radius-bottomright: 5px;
-    border-bottom-right-radius: 5px;
-    -webkit-border-bottom-right-radius: 5px;
-    -khtml-border-bottom-right-radius: 5px;
+    -moz-border-radius-bottomright: $default_radius;
+    border-bottom-right-radius: $default_radius;
+    -webkit-border-bottom-right-radius: $default_radius;
+    -khtml-border-bottom-right-radius: $default_radius;
 }
 
 div.month .footer a {
@@ -1276,20 +1285,20 @@ div.month table.month th {
     border: 1px solid #003;
     font-size: 1em;
     color: #F4F4F4;
-    padding: 5px;
+    padding: $default_radius;
     font-weight: normal;
     margin-top: 10px;
     margin-bottom: 0px;
     
-    -moz-border-radius-topleft: 5px;
-    border-top-left-radius: 5px;
-    -webkit-border-top-left-radius: 5px;
-    -khtml-border-top-left-radius: 5px;
+    -moz-border-radius-topleft: $default_radius;
+    border-top-left-radius: $default_radius;
+    -webkit-border-top-left-radius: $default_radius;
+    -khtml-border-top-left-radius: $default_radius;
 
-    -moz-border-radius-topright: 5px;
-    border-top-right-radius: 5px;
-    -webkit-border-top-right-radius: 5px;
-    -khtml-border-top-right-radius: 5px;
+    -moz-border-radius-topright: $default_radius;
+    border-top-right-radius: $default_radius;
+    -webkit-border-top-right-radius: $default_radius;
+    -khtml-border-top-right-radius: $default_radius;
 }
 
 #archive-month .month dt a {
@@ -1345,12 +1354,12 @@ h3.day-date {
     border: 1px solid #003;
     font-size: 1em;
     color: #F4F4F4;
-    padding: 5px;
+    padding: $default_radius;
     font-weight: normal;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -khtml-border-radius: 5px;
+    -moz-border-radius: $default_radius;
+    border-radius: $default_radius;
+    -webkit-border-radius: $default_radius;
+    -khtml-border-radius: $default_radius;
     margin-top: 10px;
 }
 """;

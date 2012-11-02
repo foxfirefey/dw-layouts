@@ -4,7 +4,13 @@ layerinfo "is_public"       = 1;
 layerinfo "source_viewable" = 1;
 
 set color_header_background = "#006";
+set color_header_border = "#003";
 set color_page_title = "#F4F4F4";
+
+set color_page_link = "#999966";
+set color_page_link_active = "#006";
+set color_page_link_hover = "#99991d";
+set color_page_link_visited = "#006";
 
 set font_base = "sans-serif";
 set font_fallback = "";
@@ -18,12 +24,27 @@ set color_entry_title_border = "#D6D6D6";
 
 set color_entry_text = "#606060";
 set color_entry_background = "#EFF5FF";
+set color_entry_margin_background = "#F4F4F4";
 
 set color_entry_header = "#CCC4A1";
 set color_entry_header_background = "#000066";
-set color_entry_border = "#000033";
+set color_entry_border = "#000000";
+
+set color_entry_link = "#996";
+set color_entry_link_active = "#006";
+set color_entry_link_hover = "#99991d";
+set color_entry_link_visited = "#006";
 
 set color_navigation_link = "#FFF";
 set color_navigation_background = "#006";
 set color_navigation_border = "#003";
 
+set color_module_title_background = "#006";
+set color_module_title = "#F4F4F4";
+set color_module_border = "#003";
+set color_module_background = "#f4f4f4";
+set color_module_text = "#606060";
+set color_module_link = "#999966";
+set color_module_link_active = "#006";
+set color_module_link_hover = "#99991d";
+set color_module_link_visited = "#006";
