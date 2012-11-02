@@ -243,6 +243,7 @@ function generate_corner_radius_css(int radius_value, string radius_unit, string
     foreach var string corner ($corners) {
         $corner_css = $corner_css + "    -moz-border-radius-" + $corner->replace("-", "") + ": ${radius_value}${radius_unit};\n";
         $corner_css = $corner_css + "    -webkit-border-${corner}-radius: ${radius_value}${radius_unit};\n";
+        $corner_css = $corner_css + "    border-${corner}-radius: ${radius_value}${radius_unit};\n";
     }
 
     return $corner_css;
@@ -753,8 +754,8 @@ function print_stylesheet () {
     var string page_link_visited_colors = generate_color_css($*color_page_link_visited, new Color, new Color);
     var string top_corner_radius = generate_corner_radius_css($*corner_radius, "px", ["top-left", "bottom-right"]);
     var string bottom_corner_radius = generate_corner_radius_css($*corner_radius, "px", ["top-right", "bottom-left"]);
-    var string prev_nav_radius = generate_corner_radius_css(1, "em", ["top-left", "bottom-left"]);
-    var string next_nav_radius = generate_corner_radius_css(1, "em", ["top-right", "bottom-right"]);
+    var string left_radius = generate_corner_radius_css(1, "em", ["top-left", "bottom-left"]);
+    var string right_radius = generate_corner_radius_css(1, "em", ["top-right", "bottom-right"]);
     var string all_radius = generate_corner_radius_css(1, "em", ["top-left", "top-right", "bottom-left", "bottom-right"]);
 
     start_css();
@@ -931,7 +932,7 @@ div.navigation ul { padding: 0px; margin: 0px; margin-top: 1em; }
     margin-bottom: 1em;
 }
 
-.navigation ul li {
+.page-month .navigation ul li {
     $top_corner_radius
 }
 
@@ -944,7 +945,7 @@ div.navigation ul { padding: 0px; margin: 0px; margin-top: 1em; }
 }
 
 .navigation .page-back {
-    $prev_nav_radius
+    $left_radius
     float: left;
 }
 
@@ -953,7 +954,7 @@ div.navigation ul { padding: 0px; margin: 0px; margin-top: 1em; }
 }
 
 .navigation .page-forward {
-    $next_nav_radius
+    $right_radius
     float: right;
 }
 
